@@ -55,6 +55,7 @@ class CalorieTracker {
 
     const progressEl = document.getElementById('calorie-progress')
 
+    // Swap colors
     if (remaining <= 0) {
       caloriesRemainingEl.parentElement.parentElement.classList.remove('bg-light')
       caloriesRemainingEl.parentElement.parentElement.classList.add('bg-danger')
