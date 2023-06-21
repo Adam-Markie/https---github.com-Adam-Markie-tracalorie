@@ -17,6 +17,7 @@ class CalorieTracker {
   addMeal(meal) {
     this._meals.push(meal)
     this._totalCalories += meal.calories
+    this._render()
   }
 
   addWorkout(workout) {
@@ -103,6 +104,17 @@ class Workout {
 class App {
   constructor() {
     this._tracker = new CalorieTracker()
+    document
+      .getElementById('meal-form')
+      .addEventListener('submit', this._newMeal.bind(this))
+    document
+      .getElementById('workout-form')
+      .addEventListener('submit', this._newWorkout.bind(this))
+  }
+
+  _newMeal(e) {
+    e.preventDefault()
+
     const name = document.getElementById('meal-name')
     const calories = document.getElementById('meal-calories')
 
@@ -112,7 +124,7 @@ class App {
       return
     }
 
-    const meal = new Meal(name.vlaue, +calories.value)
+    const meal = new Meal(name.value, +calories.value)
 
     this._tracker.addMeal(meal)
 
@@ -120,8 +132,24 @@ class App {
     calories.value = ''
   }
 
-  _newMeal(e) {
+  _newWorkout(e) {
     e.preventDefault()
+
+    const name = document.getElementById('workout-name')
+    const calories = document.getElementById('workout-calories')
+
+    // Validate inputs
+    if (name.value === '' || calories.value === '') {
+      alert('Please fill in all fields')
+      return
+    }
+
+    const workout = new Workout(name.value, +calories.value)
+
+    this._tracker.addWorkout(workout)
+
+    name.value = ''
+    calories.value = ''
   }
 }
 
