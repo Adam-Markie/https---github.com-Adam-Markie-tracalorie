@@ -100,18 +100,29 @@ class Workout {
   }
 }
 
-const tracker = new CalorieTracker()
+class App {
+  constructor() {
+    this._tracker = new CalorieTracker()
+    const name = document.getElementById('meal-name')
+    const calories = document.getElementById('meal-calories')
 
-const breakfast = new Meal('Breakfast', 400)
-const lunch = new Meal('Lunch', 350)
-const dinner = new Meal('Dinner', 1050)
-tracker.addMeal(breakfast)
-tracker.addMeal(lunch)
-tracker.addMeal(dinner)
+    // Validate inputs
+    if (name.value === '' || calories.value === '') {
+      alert('Please fill in all fields')
+      return
+    }
 
-const run = new Workout('morning run', 320)
-tracker.addWorkout(run)
+    const meal = new Meal(name.vlaue, +calories.value)
 
-console.log(tracker._meals)
-console.log(tracker._workouts)
-console.log(tracker._totalCalories)
+    this._tracker.addMeal(meal)
+
+    name.value = ''
+    calories.value = ''
+  }
+
+  _newMeal(e) {
+    e.preventDefault()
+  }
+}
+
+const app = new App()
