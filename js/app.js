@@ -51,7 +51,7 @@ class CalorieTracker {
   }
 
   reset() {
-    this._totalCalories = 0Ì
+    this._totalCalories = 0
     this._meals = []
     this._workouts = []
     this._render()
